@@ -1,0 +1,31 @@
+{
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3"
+  },
+  "name": "web-engineering-project-2022-",
+  "description": "This Repo consist of Web Engineering Project for Spring 2022 FAST CFD by M Abdullah, Jonathan and Zain-ul-Abideen",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/M-Abdullah-916/Web-Engineering-Project-2022-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/M-Abdullah-916/Web-Engineering-Project-2022-/issues"
+  },
+  "homepage": "https://github.com/M-Abdullah-916/Web-Engineering-Project-2022-#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "nodemon": "^2.0.15"
+  }
+}
