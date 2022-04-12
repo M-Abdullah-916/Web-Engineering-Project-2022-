@@ -1,5 +1,23 @@
-# Web-Engineering-Project-2022-
-This Repo consist of Web Engineering Project for Spring 2022 FAST CFD by M Abdullah, Jonathan and Zain-ul-Abideen
+# Node.js & Passport Login
 
-# Changing by Zain
-Addition in Readme made to push a commit for CP2 Task.
+This is a user login and registration app using Node.js, Express, Passport, Mongoose, EJS and some other packages.
+
+### Version: 2.0.0
+
+### Usage
+
+```sh
+$ npm install
+```
+
+```sh
+$ npm start
+# Or run with Nodemon
+$ npm run dev
+
+# Visit http://localhost:5000
+```
+
+### MongoDB
+
+Open "config/keys.js" and add your MongoDB URI, local or Atlas
