@@ -5,7 +5,7 @@ const options = { format: "A4" };
 
 // Add new Poem function
 exports.add = function A(req, res) {
-    res.render("AddBooksManually", { layout: "layouts/booksLayout" });
+    res.render("AddPoemsManually");
   };
   
   //exports.update = async function(req, res) {
@@ -19,7 +19,7 @@ exports.add = function A(req, res) {
   exports.create = (req, res) => {
     let poem = new Poem({
         poemName: req.body.poemName,
-        authorName: req.body.poemName,
+        authorName: req.body.authorName,
         poemGenre: req.body.poemGenre,
         poemData: req.body.poemData,
 
@@ -32,7 +32,7 @@ exports.add = function A(req, res) {
           .json({ err: "Oops something went wrong! Cannont insert poem.." });
       }
       req.flash("poem_add_success_msg", "New Poem added successfully");
-      res.redirect("/student/all");
+      res.redirect("/poem/all");
     });
   };
   
@@ -51,15 +51,14 @@ exports.add = function A(req, res) {
   };
   
   exports.all = (req, res) => {
-    Student.find(function(err, students) {
+    Poem.find(function(err, poem) {
       if (err) {
         return res
           .status(400)
-          .json({ err: "Oops something went wrong! Cannont find students." });
+          .json({ err: "Oops something went wrong! Cannont find poems." });
       }
-      res.status(200).render("student/studentAll", {
-        students,
-        layout: "layouts/studentLayout"
+      res.status(200).render("ViewAllPoems", {
+        poem
       });
       //res.send(students);
     });

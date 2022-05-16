@@ -59,7 +59,7 @@
   </nav>
 
 <h1 class="mt-4" style="text-align: center; font-size: 50px; color: rgb(216, 207, 207);" >View All Poems</h1>
-<p class="lead mb-3" style="text-align: center;">Welcome <%= user.name %></p>
+<p class="lead mb-3" style="text-align: center;">Welcome </p>
 
 <div class="container">
     <div class="table-wrapper">
@@ -105,12 +105,12 @@
           </tr>
         </thead>
         <tbody>
-          <% if(typeof Poems != 'undefined'){ %> <%
-            Poems.forEach(function(Poems) { %>
+          <% if(typeof poem != 'undefined'){ %> <%
+            poem.forEach(function(poem) { %>
           <tr>
-            <td><%= Poems.bookName%></td>
-            <td><%= Poems.authorName%></td>
-            <td><%= Poems.bookGenre%></td>
+            <td><%= poem.poemName%></td>
+            <td><%= poem.authorName%></td>
+            <td><%= poem.poemGenre%></td>
             <td>
               <a
                 href="#"

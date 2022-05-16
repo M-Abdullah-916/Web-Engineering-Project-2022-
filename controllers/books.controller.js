@@ -5,7 +5,7 @@ const options = { format: "A4" };
 
 // Add new Book function
 exports.add = function A(req, res) {
-    res.render("AddBooksManually", { layout: "layouts/booksLayout" });
+    res.render("AddBooksManually");
   };
   
   //exports.update = async function(req, res) {
