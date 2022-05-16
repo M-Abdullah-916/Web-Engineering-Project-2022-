@@ -35,8 +35,11 @@ router.get('/AddPoemManually', (req, res) => res.render('AddPoemManually', { use
 // Add Poem Automatically
 router.get('/AddPoemAutomatically', (req, res) => res.render('AddPoemAutomatically', { user: req.user }));
 
+// Update Book with Parameters
+router.get('/UpdateBook/:id', (req, res) => res.redirect('/book/update/?id='+req.params.id));
+
 // Update Book
-router.get('/UpdateBook', (req, res) => res.redirect("/book/update"));
+router.get('/UpdateBookNP', (req, res) => res.redirect("/book/update"));
 
 // Delete Book
 router.get('/DeleteBook', (req, res) => res.render('DeleteBook', { user: req.user }));

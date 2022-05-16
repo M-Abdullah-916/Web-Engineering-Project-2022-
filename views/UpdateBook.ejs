@@ -20,7 +20,7 @@
           <a class="dropdown-item" href="/users/AddBooksAutomatically">Add Book Automatically</a>
           <a class="dropdown-item" href="/users/DeleteBook">Delete Book</a>
           <a class="dropdown-item" href="/users/SearchBook">Search Book</a>
-          <a class="dropdown-item" href="/users/UpdateBook">Update Book</a>
+          <a class="dropdown-item" href="/users/UpdateBookNP">Update Book</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">View bookmarked Books</a>
           <a class="dropdown-item" href="/users/ViewAllBooks">View all Books</a>
@@ -112,7 +112,7 @@
         </tr>
       </thead>
       <tbody>
-        <% if(typeof book !='undefined' ){ %>
+        <% if(typeof book !='undefined'){ %>
           <% book.forEach(function(book) { %>
             <tr>
               <td>
@@ -125,7 +125,7 @@
                 <%= book.bookGenre%>
               </td>
               <td>
-                <a href="/book/update" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>     
+                <a href="/book/updateParam/<%=book._id%>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a> 
               </td>
             </tr>
             <% }); %>

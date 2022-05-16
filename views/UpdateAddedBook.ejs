@@ -1,0 +1,33 @@
+<div class="container">
+    <% if(typeof book !='undefined' && book != null){ %>
+    <h1>Update Book</h1>
+    <form action="/book/update/<%=book._id%>" method="POST">
+        <div class="form-group">
+            <label for="bookName">Book Name</label>
+            <input type="text" class="form-control" id="bookName" name="bookName" placeholder="Roll Number"
+                value='<%= typeof book.bookName != ' undefined' ? book.bookName : '' %>' />
+        </div>
+        <div class="form-group">
+            <label for="authorName">Author Name</label>
+            <input type="text" class="form-control" id="authorName" name="authorName" placeholder="Author Name"
+                value='<%= typeof book.authorName != ' undefined' ? book.authorName : '' %>' />
+        </div>
+        <div class="form-group">
+            <label for="bookGenre">Book Genre</label>
+            <input type="text" class="form-control" id="bookGenre" name="bookGenre" placeholder="Book Genre"
+                value='<%= typeof book.bookGenre != ' undefined' ? book.bookGenre : '' %>' />
+        </div>
+        <div class="form-group">
+            <label for="bookData">Book Content</label>
+            <input type="text" class="form-control" id="bookData" name="bookData" placeholder="Book Content"
+                value='<%= typeof book.bookData != ' undefined' ? book.bookData : '' %>' />
+        </div>
+        <input type="submit" name="submit" value="Update" class="btn btn-primary btn-block" />
+    </form>
+    <br />
+    <a href="/book/all" class="">
+        <i class="fas fa-home" style="color:green">View List</i>
+    </a>
+    <% } %>
+</div>
+

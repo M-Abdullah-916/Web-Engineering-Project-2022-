@@ -112,7 +112,7 @@
         </tr>
       </thead>
       <tbody>
-        <% if(typeof poem !='undefined' ){ %>
+        <% if(typeof poem !='undefined' && poem != null){ %>
           <% poem.forEach(function(poem) { %>
             <tr>
               <td>
@@ -126,6 +126,7 @@
               </td>
               <td>
                 <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                </script>
               </td>
             </tr>
             <% }); %>
