@@ -45,6 +45,12 @@ router.get('/DeletePoem', (req, res) => res.render('DeletePoem',{user: req.user}
 // Update Poem
 router.get('/UpdatePoem', (req, res) => res.render('UpdatePoem',{user: req.user}));
 
+// View all Books 
+router.get('/ViewAllBooks', (req, res) => res.render('ViewAllBooks',{user: req.user}));
+
+// View all Poems 
+router.get('/ViewAllPoems', (req, res) => res.render('ViewAllPoems',{user: req.user}));
+
 router.get('/mainScreen', forwardAuthenticated, (req, res) => res.render('mainScreen'));
 
 

@@ -16,4 +16,4 @@ let PoemSchema = new Schema(
 );
 
 // Export the model
-module.exports = mongoose.model("Poems", StudentSchema);
+module.exports = mongoose.model("Poems", PoemSchema);

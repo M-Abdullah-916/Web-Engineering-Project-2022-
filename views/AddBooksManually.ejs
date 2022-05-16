@@ -21,7 +21,7 @@
             <a class="dropdown-item" href="/users/UpdateBook">Update Book</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">View bookmarked Books</a>
-            <a class="dropdown-item" href="#">View all Books</a>
+            <a class="dropdown-item" href="/users/ViewAllBooks">View all Books</a>
           </div>
         </li>
         <li class="nav-item dropdown">
@@ -36,7 +36,7 @@
             <a class="dropdown-item" href="/users/UpdatePoem">Update Poem</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">View bookmarked Poems</a>
-            <a class="dropdown-item" href="#">View all Poems</a>
+            <a class="dropdown-item" href="/users/ViewAllPoems">View all Poems</a>
           </div>
         </li>
         
@@ -69,55 +69,51 @@
           <i class="fa fa-book"></i> Add Books Manually
         </h1>
         <% include ./partials/messages %>
-        <form action="/users/AddBooks" method="POST">
+        <form action="/book/add" method="POST">
           <div class="form-group">
-            <label for="bookname">Book Name</label>
+            <label for="bookName">Book Name</label>
             <input
               type="text"
-              id="bookname"
-              name="bookname"
+              id="bookName"
+              name="bookName"
               class="form-control"
               placeholder="Enter Book Name"
-              value="<%= typeof name != 'undefined' ? name : '' %>"
+              
             />
           </div>
           <div class="form-group">
-            <label for="authorname">Author Name</label>
+            <label for="authorName">Author Name</label>
             <input
               type="text"
-              id="authorname"
-              name="authorname"
+              id="authorName"
+              name="authorName"
               class="form-control"
               placeholder="Enter Author Name"
-              value="<%= typeof email != 'undefined' ? email : '' %>"
+              
             />
           </div>
           <div class="form-group">
-            <label for="genre">Book Genre</label>
+            <label for="bookGenre">Book Genre</label>
             <input
               type="text"
-              id="genre"
-              name="genre"
+              id="bookGenre"
+              name="bookGenre"
               class="form-control"
               placeholder="Enter Book Genre"
-              value="<%= typeof password != 'undefined' ? password : '' %>"
+              
             />
           </div>
           <div class="form-group">
-            <label for="content">Book Content</label>
+            <label for="bookData">Book Content</label>
             <textarea 
-            name="content" 
-            id="content" 
+            name="bookData" 
+            id="bookData" 
             cols="77" 
             rows="10" 
-            placeholder="Enter Book Content" 
-            value="<%= typeof password != 'undefined' ? password : '' %>">
-        </textarea>
-            
+            placeholder="Enter Book Content" >
+          </textarea>  
           </div>
-          <button type="submit" class="btn btn-primary btn-block">
-            Add Book
-          </button>
+          <input type="submit" name="submit" value="Add Book" class="btn btn-success" />
         </form>
       </div>
     </div>
