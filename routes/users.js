@@ -2,9 +2,17 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+var multer = require('multer')
+var path = require('path')
+
+
 // Load User model
 const User = require('../models/User');
-const { forwardAuthenticated } = require('../config/auth');
+const { forwardAuthenticated, ensureAuthenticated } = require('../config/auth');
+
+//Controllers
+const editProfile_controller = require("../controllers/editProfileController");
+
 
 // Login Page
 router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
@@ -13,53 +21,60 @@ router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
 router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
 
 // Dashboard Page
-router.get('/dashboard', (req, res) => res.render('dashboard',{user: req.user}));
+router.get('/dashboard', (req, res) => res.render('dashboard', { user: req.user }));
 
 // Add Book Manually
-router.get('/AddBooksManually', (req, res) => res.render('AddBooksManually',{user: req.user}));
+router.get('/AddBooksManually', (req, res) => res.render('AddBooksManually', { user: req.user }));
 
 // Add Book Automatically
-router.get('/AddBooksAutomatically', (req, res) => res.render('AddBooksAutomatically',{user: req.user}));
+router.get('/AddBooksAutomatically', (req, res) => res.render('AddBooksAutomatically', { user: req.user }));
 
 // Add Poem Manually
-router.get('/AddPoemManually', (req, res) => res.render('AddPoemManually',{user: req.user}));
+router.get('/AddPoemManually', (req, res) => res.render('AddPoemManually', { user: req.user }));
 
 // Add Poem Automatically
-router.get('/AddPoemAutomatically', (req, res) => res.render('AddPoemAutomatically',{user: req.user}));
+router.get('/AddPoemAutomatically', (req, res) => res.render('AddPoemAutomatically', { user: req.user }));
 
 // Update Book
-router.get('/UpdateBook', (req, res) => res.render('UpdateBook',{user: req.user}));
+router.get('/UpdateBook', (req, res) => res.render('UpdateBook', { user: req.user }));
 
 // Delete Book
-router.get('/DeleteBook', (req, res) => res.render('DeleteBook',{user: req.user}));
+router.get('/DeleteBook', (req, res) => res.render('DeleteBook', { user: req.user }));
 
 // Search Book
-router.get('/SearchBook', (req, res) => res.render('SearchBook',{user: req.user}));
+router.get('/SearchBook', (req, res) => res.render('SearchBook', { user: req.user }));
 
 // Search Poem
-router.get('/SearchPoem', (req, res) => res.render('SearchPoem',{user: req.user}));
+router.get('/SearchPoem', (req, res) => res.render('SearchPoem', { user: req.user }));
 
 // Delete Poem
-router.get('/DeletePoem', (req, res) => res.render('DeletePoem',{user: req.user}));
+router.get('/DeletePoem', (req, res) => res.render('DeletePoem', { user: req.user }));
 
 // Update Poem
-router.get('/UpdatePoem', (req, res) => res.render('UpdatePoem',{user: req.user}));
+router.get('/UpdatePoem', (req, res) => res.render('UpdatePoem', { user: req.user }));
 
 // View all Books 
-router.get('/ViewAllBooks', (req, res) => res.render('ViewAllBooks',{user: req.user}));
+router.get('/ViewAllBooks', (req, res) => res.render('ViewAllBooks', { user: req.user }));
 
 // View all Poems 
-router.get('/ViewAllPoems', (req, res) => res.render('ViewAllPoems',{user: req.user}));
+router.get('/ViewAllPoems', (req, res) => res.render('ViewAllPoems', { user: req.user }));
 
 router.get('/mainScreen', forwardAuthenticated, (req, res) => res.render('mainScreen'));
+
+//Edit Profile
+router.get('/editProfileView', ensureAuthenticated, editProfile_controller.show, (req, res) => res.render('editProfile', { user: req.user }))
+router.post('/editProfile', ensureAuthenticated, editProfile_controller.upload, editProfile_controller.update, editProfile_controller.show)
+
+router.get('/editProfileView/security', (req, res) => res.render('security', { user: req.user }))
+
 
 
 // Register
 router.post('/register', (req, res) => {
-    const { name, email, password, password2 } = req.body;
+    const { firstname, lastname, username, phonenumber, dob, email, password, password2, image } = req.body;
     let errors = [];
 
-    if (!name || !email || !password || !password2) {
+    if (!firstname || !lastname || !username || !phonenumber || !dob || !email || !password || !password2) {
         errors.push({ msg: 'Please enter all fields' });
     }
 
@@ -74,10 +89,15 @@ router.post('/register', (req, res) => {
     if (errors.length > 0) {
         res.render('register', {
             errors,
-            name,
+            firstname,
+            lastname,
+            username,
+            phonenumber,
+            dob,
             email,
             password,
-            password2
+            password2,
+            image
         });
     } else {
         User.findOne({ email: email }).then(user => {
@@ -85,16 +105,26 @@ router.post('/register', (req, res) => {
                 errors.push({ msg: 'Email already exists' });
                 res.render('register', {
                     errors,
-                    name,
+                    firstname,
+                    lastname,
+                    username,
+                    phonenumber,
+                    dob,
                     email,
                     password,
-                    password2
+                    password2,
+                    image
                 });
             } else {
                 const newUser = new User({
-                    name,
+                    firstname,
+                    lastname,
+                    username,
+                    phonenumber,
+                    dob,
                     email,
-                    password
+                    password,
+                    image
                 });
 
                 bcrypt.genSalt(10, (err, salt) => {
@@ -117,6 +147,7 @@ router.post('/register', (req, res) => {
         });
     }
 });
+
 
 // Login
 router.post('/login', (req, res, next) => {
