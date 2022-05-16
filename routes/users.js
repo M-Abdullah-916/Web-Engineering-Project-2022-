@@ -12,7 +12,35 @@ router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
 // Register Page
 router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
 
+// Add Book Manually
+router.get('/AddBooksManually', (req, res) => res.render('AddBooksManually',{user: req.user}));
 
+// Add Book Automatically
+router.get('/AddBooksAutomatically', (req, res) => res.render('AddBooksAutomatically',{user: req.user}));
+
+// Add Poem Manually
+router.get('/AddPoemManually', (req, res) => res.render('AddPoemManually',{user: req.user}));
+
+// Add Poem Automatically
+router.get('/AddPoemAutomatically', (req, res) => res.render('AddPoemAutomatically',{user: req.user}));
+
+// Update Book
+router.get('/UpdateBook', (req, res) => res.render('UpdateBook',{user: req.user}));
+
+// Delete Book
+router.get('/DeleteBook', (req, res) => res.render('DeleteBook',{user: req.user}));
+
+// Search Book
+router.get('/SearchBook', (req, res) => res.render('SearchBook',{user: req.user}));
+
+// Search Poem
+router.get('/SearchPoem', (req, res) => res.render('SearchPoem',{user: req.user}));
+
+// Delete Poem
+router.get('/DeletePoem', (req, res) => res.render('DeletePoem',{user: req.user}));
+
+// Update Poem
+router.get('/UpdatePoem', (req, res) => res.render('UpdatePoem',{user: req.user}));
 
 
 
