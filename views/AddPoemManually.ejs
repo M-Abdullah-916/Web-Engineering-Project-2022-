@@ -69,55 +69,50 @@
             <i class="fa fa-book"></i> Add Poem Manually
           </h1>
           <% include ./partials/messages %>
-          <form action="/users/AddBooks" method="POST">
+          <form action="/poem/add" method="POST">
             <div class="form-group">
-              <label for="poemname">Poem Name</label>
+              <label for="poemName">Poem Name</label>
               <input
                 type="text"
-                id="poemname"
-                name="poemname"
+                id="poemName"
+                name="poemName"
                 class="form-control"
                 placeholder="Enter Poem Name"
                 value="<%= typeof name != 'undefined' ? name : '' %>"
               />
             </div>
             <div class="form-group">
-              <label for="authorname">Author Name</label>
+              <label for="authorName">Author Name</label>
               <input
                 type="text"
-                id="authorname"
-                name="authorname"
+                id="authorName"
+                name="authorName"
                 class="form-control"
                 placeholder="Enter Author Name"
-                value="<%= typeof email != 'undefined' ? email : '' %>"
               />
             </div>
             <div class="form-group">
-              <label for="genre">Poem Genre</label>
+              <label for="poemGenre">Poem Genre</label>
               <input
                 type="text"
-                id="genre"
-                name="genre"
+                id="poemGenre"
+                name="poemGenre"
                 class="form-control"
                 placeholder="Enter Book Genre"
-                value="<%= typeof password != 'undefined' ? password : '' %>"
               />
             </div>
             <div class="form-group">
-              <label for="content">Poem Content</label>
+              <label for="poemData">Poem Content</label>
               <textarea 
-              name="content" 
-              id="content" 
+              name="poemData" 
+              id="poemData" 
               cols="77" 
               rows="10" 
-              placeholder="Enter Poem Content" 
-              value="<%= typeof password != 'undefined' ? password : '' %>">
-          </textarea>
+              placeholder="Enter Poem Content" >
+            </textarea>
               
             </div>
-            <button type="submit" class="btn btn-primary btn-block">
-              Add Poem
-            </button>
+            <input type="submit" name="submit" value="Add Poem" class="btn btn-success" />
           </form>
         </div>
       </div>
