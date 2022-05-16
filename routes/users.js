@@ -12,6 +12,9 @@ router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
 // Register Page
 router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
 
+// Dashboard Page
+router.get('/dashboard', (req, res) => res.render('dashboard',{user: req.user}));
+
 // Add Book Manually
 router.get('/AddBooksManually', (req, res) => res.render('AddBooksManually',{user: req.user}));
 
