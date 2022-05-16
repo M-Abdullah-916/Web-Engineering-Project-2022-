@@ -69,49 +69,47 @@
         <i class="fa fa-book"></i> Add Books Manually
       </h1>
       <% include ./partials/messages %>
-      <form action="/users/AddBooks" method="POST">
+      <form action="/book/adda" method="POST">
         <div class="form-group">
-          <label for="bookname">Book Name</label>
+          <label for="bookName">Book Name</label>
           <input
             type="text"
-            id="bookname"
-            name="bookname"
+            id="bookName"
+            name="bookName"
             class="form-control"
             placeholder="Enter Book Name"
             value="<%= typeof name != 'undefined' ? name : '' %>"
           />
         </div>
         <div class="form-group">
-          <label for="authorname">Author Name</label>
+          <label for="authorName">Author Name</label>
           <input
             type="text"
-            id="authorname"
-            name="authorname"
+            id="authorName"
+            name="authorName"
             class="form-control"
             placeholder="Enter Author Name"
             value="<%= typeof email != 'undefined' ? email : '' %>"
           />
         </div>
         <div class="form-group">
-          <label for="genre">Book Genre</label>
+          <label for="bookGenre">Book Genre</label>
           <input
             type="text"
-            id="genre"
-            name="genre"
+            id="bookGenre"
+            name="bookGenre"
             class="form-control"
             placeholder="Enter Book Genre"
             value="<%= typeof password != 'undefined' ? password : '' %>"
           />
         </div>
         <div class="form-group">
-          <label class="form-label" for="customFile">Browse book to add:</label>
-          <input type="file" class="form-control" id="customFile" />  
+          <label class="form-label" for="bookData">Browse book to add:</label>
+          <input type="file" class="form-control" id="bookData" />  
       </textarea>
           
         </div>
-        <button type="submit" class="btn btn-primary btn-block">
-          Add Book
-        </button>
+        <input type="submit" name="submit" value="Add Book" class="btn btn-primary btn-block" />
       </form>
     </div>
   </div>

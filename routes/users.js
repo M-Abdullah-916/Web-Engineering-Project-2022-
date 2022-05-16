@@ -36,7 +36,7 @@ router.get('/AddPoemManually', (req, res) => res.render('AddPoemManually', { use
 router.get('/AddPoemAutomatically', (req, res) => res.render('AddPoemAutomatically', { user: req.user }));
 
 // Update Book
-router.get('/UpdateBook', (req, res) => res.render('UpdateBook', { user: req.user }));
+router.get('/UpdateBook', (req, res) => res.redirect("/book/update"));
 
 // Delete Book
 router.get('/DeleteBook', (req, res) => res.render('DeleteBook', { user: req.user }));
@@ -51,7 +51,7 @@ router.get('/SearchPoem', (req, res) => res.render('SearchPoem', { user: req.use
 router.get('/DeletePoem', (req, res) => res.render('DeletePoem', { user: req.user }));
 
 // Update Poem
-router.get('/UpdatePoem', (req, res) => res.render('UpdatePoem', { user: req.user }));
+router.get('/UpdatePoem', (req, res) => res.redirect("/poem/update"));
 
 // View all Books 
 router.get('/ViewAllBooks', (req, res) => res.redirect("/book/all"));

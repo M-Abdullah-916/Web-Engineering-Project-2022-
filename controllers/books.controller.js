@@ -8,15 +8,35 @@ exports.add = function A(req, res) {
     res.render("AddBooksManually");
 };
 
-//exports.update = async function(req, res) {
-//  let student = await Student.findOne({ _id: req.params.id });
-//  res.render("student/studentUpdate", {
-//    student,
-//     layout: "layouts/studentLayout"
-//  });
-// };
+exports.update = async function(req, res) {
+  let book = await Book.findOne({ _id: req.params.id });
+  res.render("UpdateBook", {
+    book,
+  });
+ };
 
-exports.create = (req, res) => {
+exports.createManual = (req, res) => {
+    let book = new Book({
+        bookName: req.body.bookName,
+        authorName: req.body.authorName,
+        bookGenre: req.body.bookGenre,
+        bookData: req.body.bookData,
+
+    });
+
+    book.save(function(err) {
+        if (err) {
+            return res
+                .status(400)
+                .json({ err: "Oops something went wrong! Cannont insert book.." });
+        }
+        req.flash("book_add_success_msg", "New Book added successfully");
+        res.redirect("/book/all");
+    });
+};
+
+
+exports.createAutomatic = (req, res) => {
     let book = new Book({
         bookName: req.body.bookName,
         authorName: req.body.authorName,
