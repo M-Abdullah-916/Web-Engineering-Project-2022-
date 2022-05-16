@@ -56,6 +56,8 @@ app.use(function(req, res, next) {
 // Routes
 app.use('/', require('./routes/index.js'));
 app.use('/users', require('./routes/users.js'));
+app.use('/book', require('./routes/book.route.js'));
+app.use('/poem', require('./routes/poem.route.js'));
 app.use('/public', express.static('public'));
 app.use('/users/public', express.static('public'));
 

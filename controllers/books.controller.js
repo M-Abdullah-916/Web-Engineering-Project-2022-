@@ -1,5 +1,5 @@
 const Book = require("../models/books.model");
-const pdf = require("html-pdf");
+//const pdf = require("html-pdf");
 const fs = require("fs");
 const options = { format: "A4" };
 
@@ -32,7 +32,7 @@ exports.create = (req, res) => {
                 .json({ err: "Oops something went wrong! Cannont insert book.." });
         }
         req.flash("book_add_success_msg", "New Book added successfully");
-        res.redirect("/student/all");
+        res.redirect("/book/all");
     });
 };
 
@@ -51,15 +51,14 @@ exports.details = (req, res) => {
 };
 
 exports.all = (req, res) => {
-    Student.find(function(err, students) {
+    Book.find(function(err, book) {
         if (err) {
             return res
                 .status(400)
-                .json({ err: "Oops something went wrong! Cannont find students." });
+                .json({ err: "Oops something went wrong! Cannont find Books." });
         }
-        res.status(200).render("student/studentAll", {
-            students,
-            layout: "layouts/studentLayout"
+        res.status(200).render("ViewAllBooks", {
+            book
         });
         //res.send(students);
     });

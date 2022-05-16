@@ -59,7 +59,7 @@
   </nav>
 
 <h1 class="mt-4" style="text-align: center; font-size: 50px; color: rgb(216, 207, 207);" >View All Books</h1>
-<p class="lead mb-3" style="text-align: center;">Welcome <%= user.name %></p>
+<p class="lead mb-3" style="text-align: center;">Welcome </p>
 
 <div class="container">
     <div class="table-wrapper">
@@ -105,12 +105,12 @@
           </tr>
         </thead>
         <tbody>
-          <% if(typeof Books != 'undefined'){ %> <%
-            Books.forEach(function(Books) { %>
+          <% if(typeof book != 'undefined'){ %> <%
+            book.forEach(function(book) { %>
           <tr>
-            <td><%= Books.bookName%></td>
-            <td><%= Books.authorName%></td>
-            <td><%= Books.bookGenre%></td>
+            <td><%= book.bookName%></td>
+            <td><%= book.authorName%></td>
+            <td><%= book.bookGenre%></td>
             <td>
               <a
                 href="#"
