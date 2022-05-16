@@ -1,0 +1,124 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Arabic Corpus</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Books
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/users/AddBooksManually">Add Book Manually</a>
+              <a class="dropdown-item" href="/users/AddBooksAutomatically">Add Book Automatically</a>
+              <a class="dropdown-item" href="/users/DeleteBook">Delete Book</a>
+              <a class="dropdown-item" href="/users/SearchBook">Search Book</a>
+              <a class="dropdown-item" href="/users/UpdateBook">Update Book</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Add Book to Bookmarks</a>
+              <a class="dropdown-item" href="#">View all Books</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Poems
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+              <a class="dropdown-item" href="/users/AddPoemManually">Add Poem Manually</a>
+              <a class="dropdown-item" href="/users/AddPoemAutomatically">Add Poem Automatically</a>
+              <a class="dropdown-item" href="/users/DeletePoem">Delete Poem</a>
+              <a class="dropdown-item" href="/users/SearchPoem">Search Poem</a>
+              <a class="dropdown-item" href="/users/UpdatePoem">Update Poem</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Add Poem to Bookmarks</a>
+              <a class="dropdown-item" href="#">View all Poems</a>
+            </div>
+          </li>
+          
+        <li class="nav-item">
+            <a class="nav-link" href="#">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Project Details</a>
+          </li>
+       
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+      <li class="nav-item">
+        <a href="/users/logout" class="btn btn-outline-success my-2 my-sm-0" style="margin-left: 20%;">Logout</a>
+      </li>
+    </div>
+  </nav>
+  
+  <h1 class="mt-4" style="text-align: center; font-size: 50px; color: rgb(216, 207, 207);" >Add Poem Manually</h1>
+  <p class="lead mb-3" style="text-align: center;">Welcome <%= user.name %></p>
+  
+  
+  <div class="row mt-5">
+      <div class="col-md-6 m-auto">
+        <div class="card card-body">
+          <h1 class="text-center mb-3">
+            <i class="fa fa-book"></i> Add Poem Manually
+          </h1>
+          <% include ./partials/messages %>
+          <form action="/users/AddBooks" method="POST">
+            <div class="form-group">
+              <label for="poemname">Poem Name</label>
+              <input
+                type="text"
+                id="poemname"
+                name="poemname"
+                class="form-control"
+                placeholder="Enter Poem Name"
+                value="<%= typeof name != 'undefined' ? name : '' %>"
+              />
+            </div>
+            <div class="form-group">
+              <label for="authorname">Author Name</label>
+              <input
+                type="text"
+                id="authorname"
+                name="authorname"
+                class="form-control"
+                placeholder="Enter Author Name"
+                value="<%= typeof email != 'undefined' ? email : '' %>"
+              />
+            </div>
+            <div class="form-group">
+              <label for="genre">Poem Genre</label>
+              <input
+                type="text"
+                id="genre"
+                name="genre"
+                class="form-control"
+                placeholder="Enter Book Genre"
+                value="<%= typeof password != 'undefined' ? password : '' %>"
+              />
+            </div>
+            <div class="form-group">
+              <label for="content">Poem Content</label>
+              <textarea 
+              name="content" 
+              id="content" 
+              cols="77" 
+              rows="10" 
+              placeholder="Enter Poem Content" 
+              value="<%= typeof password != 'undefined' ? password : '' %>">
+          </textarea>
+              
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              Add Poem
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
