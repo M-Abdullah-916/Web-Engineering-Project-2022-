@@ -23,8 +23,7 @@ exports.update = async function (req, res) {
 };
 
 exports.updateParam = async function (req, res) {
-    let book = await Book.findOne({ _id: req.params.id });
-    console.log(book);
+    let book = await Book.findById({ _id: req.params.id });
     res.render("UpdateAddedBook", {
         book
     });
@@ -101,13 +100,14 @@ exports.all = (req, res) => {
 
 // Post Update to insert data in database
 exports.updateBook = async (req, res) => {
-    let result = await Book.updateOne({ bookName: req.params.bookName }, { $set: req.body });
+    let result = await Book.findByIdAndUpdate( req.params.id , { $set: req.body });
     if (!result)
         return res.status(400).json({
-            err: `Oops something went wrong! Cannont update student with ${req.params.bookName}.`
+            err: `Oops something went wrong! Cannont update Book with ${req.params.id}.`
         });
-    req.flash("student_update_success_msg", "Student updated successfully");
-    res.redirect("/book/all");
+        res.redirect("/book/all");
+     req.flash("book_update_success_msg", "Book updated successfully");
+    
 };
 
 exports.delete = async (req, res) => {
