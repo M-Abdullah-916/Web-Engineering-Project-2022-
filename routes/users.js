@@ -42,7 +42,7 @@ router.get('/UpdateAddedBooks', (req, res) => res.render('UpdateAddedBooks'));
 router.get('/UpdateBookNP', (req, res) => res.redirect("/book/update"));
 
 // Delete Book
-router.get('/DeleteBook', (req, res) => res.render('DeleteBook', { user: req.user }));
+router.get('/DeleteBook', (req, res) => res.redirect("/book/delete"));
 
 // Search Book
 router.get('/SearchBook', (req, res) => res.render('SearchBook', { user: req.user }));

@@ -110,14 +110,28 @@ exports.updateBook = async (req, res) => {
     
 };
 
-exports.delete = async (req, res) => {
-    let result = await Student.deleteOne({ _id: req.params.id });
+exports.delete = async function (req, res) {
+    Book.find(function (err, book) {
+        if (err) {
+            return res
+                .status(400)
+                .json({ err: "Oops something went wrong! Cannont find Books." });
+        }
+        res.status(200).render("DeleteBook", {
+            book
+        });
+        //res.send(students);
+    });
+};
+
+exports.deleteBook = async (req, res) => {
+    let result = await Book.deleteOne({ _id: req.params.id });
     if (!result)
         return res.status(400).json({
             err: `Oops something went wrong! Cannont delete student with ${req.params.id}.`
         });
     req.flash("student_del_success_msg", "Student has been deleted successfully");
-    res.redirect("/student/all");
+    res.redirect("/book/all");
 };
 
 exports.allReport = (req, res) => {

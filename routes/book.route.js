@@ -10,6 +10,9 @@ router.get("/all", book_controller.all);
 router.get("/updateParam/:id", book_controller.updateParam);
 router.post("/update/:id", book_controller.updateBook);
 router.get("/update", book_controller.update);
+router.get("/delete", book_controller.delete);
+router.get("/delete/:id", book_controller.deleteBook);
+
 
 
 module.exports = router;
