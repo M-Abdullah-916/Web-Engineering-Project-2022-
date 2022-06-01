@@ -135,24 +135,23 @@ exports.deleteBook = async (req, res) => {
 };
 
 exports.allReport = (req, res) => {
-    Student.find(function (err, students) {
+    Book.find(function (err, book) {
         if (err) {
             return res
                 .status(400)
-                .json({ err: "Oops something went wrong! Cannont find students." });
+                .json({ err: "Oops something went wrong! Cannont find books." });
         }
         res.status(200).render(
-            "reports/student/allStudent", {
-            students,
-            layout: "layouts/studentLayout"
+            "reports/book/all", {
+            book
         },
             function (err, html) {
                 pdf
                     .create(html, options)
-                    .toFile("uploads/allStudents.pdf", function (err, result) {
+                    .toFile("uploads/all.pdf", function (err, result) {
                         if (err) return console.log(err);
                         else {
-                            var datafile = fs.readFileSync("uploads/allStudents.pdf");
+                            var datafile = fs.readFileSync("uploads/all.pdf");
                             res.header("content-type", "application/pdf");
                             res.send(datafile);
                         }
