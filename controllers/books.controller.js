@@ -22,6 +22,14 @@ exports.update = async function (req, res) {
     });
 };
 
+exports.details = async function (req, res)  {
+    let book = await Book.findById({ _id: req.params.id });
+    console.log(book)
+    res.render("BooksData", {
+        book
+    });
+};
+
 exports.updateParam = async function (req, res) {
     let book = await Book.findById({ _id: req.params.id });
     res.render("UpdateAddedBook", {
@@ -70,19 +78,7 @@ exports.createAutomatic = (req, res) => {
     });
 };
 
-exports.details = (req, res) => {
-    Book.findById(req.params.id, function (err, book) {
-        if (err) {
-            return res.status(400).json({
-                err: `Oops something went wrong! Cannont find Book with ${req.params.id}.`
-            });
-        }
-        res.render("student/studentDetail", {
-            student,
-            layout: "layouts/studentLayout"
-        });
-    });
-};
+
 
 exports.all = (req, res) => {
     Book.find(function (err, book) {
@@ -110,6 +106,8 @@ exports.updateBook = async (req, res) => {
     
 };
 
+
+
 exports.delete = async function (req, res) {
     Book.find(function (err, book) {
         if (err) {
@@ -120,7 +118,6 @@ exports.delete = async function (req, res) {
         res.status(200).render("DeleteBook", {
             book
         });
-        //res.send(students);
     });
 };
 

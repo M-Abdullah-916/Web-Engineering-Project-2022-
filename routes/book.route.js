@@ -12,6 +12,7 @@ router.post("/update/:id", book_controller.updateBook);
 router.get("/update", book_controller.update);
 router.get("/delete", book_controller.delete);
 router.get("/delete/:id", book_controller.deleteBook);
+router.get("/details/:id", book_controller.details);
 
 
 
