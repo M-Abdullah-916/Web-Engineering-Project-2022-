@@ -22,9 +22,8 @@ exports.update = async function (req, res) {
     });
 };
 
-exports.details = async function (req, res)  {
+exports.details = async function (req, res) {
     let book = await Book.findById({ _id: req.params.id });
-    console.log(book)
     res.render("BooksData", {
         book
     });
@@ -80,7 +79,8 @@ exports.createAutomatic = (req, res) => {
 
 
 
-exports.all = (req, res) => {
+exports.all =(req, res) => {
+    
     Book.find(function (err, book) {
         if (err) {
             return res
@@ -88,22 +88,24 @@ exports.all = (req, res) => {
                 .json({ err: "Oops something went wrong! Cannont find Books." });
         }
         res.status(200).render("ViewAllBooks", {
+            
             book
         });
+        
         //res.send(students);
     });
 };
 
 // Post Update to insert data in database
 exports.updateBook = async (req, res) => {
-    let result = await Book.findByIdAndUpdate( req.params.id , { $set: req.body });
+    let result = await Book.findByIdAndUpdate(req.params.id, { $set: req.body });
     if (!result)
         return res.status(400).json({
             err: `Oops something went wrong! Cannont update Book with ${req.params.id}.`
         });
-        res.redirect("/book/all");
-     req.flash("book_update_success_msg", "Book updated successfully");
-    
+    res.redirect("/book/all");
+    req.flash("book_update_success_msg", "Book updated successfully");
+
 };
 
 
@@ -130,7 +132,7 @@ exports.deleteBook = async (req, res) => {
     req.flash("student_del_success_msg", "Student has been deleted successfully");
     res.redirect("/book/all");
 };
-
+PaginatedResults();
 exports.allReport = (req, res) => {
     Book.find(function (err, book) {
         if (err) {
@@ -157,3 +159,39 @@ exports.allReport = (req, res) => {
         );
     });
 };
+
+function PaginatedResults(model){
+    return async (req,res,next) => {
+        const page = parseInt(req.query.page)
+        const limit = parseInt(req.query.limit)
+
+        const startIndex = (page - 1) * limit
+        const endIndex = page * limit
+
+        const results = {}
+
+    if (endIndex < model.length){
+        results.next = {
+        page: page + 1,
+        limit: limit
+        }
+    }
+
+    if (startIndex > 0) {
+        results.previous = {
+        page: page - 1,
+        limit: limit
+        }
+    }
+
+    try{
+        results.results = await model.find().limit(limit).skip(startIndex).exec()
+        res.PaginatedResults = results
+        next()
+    } catch (e)  {
+        res.status(500).json({mesaage: e.mesaage})
+    }
+
+    }
+}
+
