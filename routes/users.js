@@ -180,7 +180,7 @@ function isAdmin(req, res, next) {
     let id = req.user._id;
     User.findOne({ _id: id }).then(user => {
         if (!user) {
-            console.log("Hmm");
+            console.log("Not A User");
            
         } else {
             rol = user.role;   
