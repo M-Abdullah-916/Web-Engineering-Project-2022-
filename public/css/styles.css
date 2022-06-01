@@ -2433,6 +2433,12 @@ textarea.form-control-lg {
     appearance: none;
 }
 
+#genReportBtn{
+    background-color: rgb(48, 117, 220);
+    color: white;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  }
+
 .form-check-input[type=checkbox] {
     border-radius: 0.25em;
 }

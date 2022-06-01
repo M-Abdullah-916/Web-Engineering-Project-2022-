@@ -14,6 +14,9 @@ router.get("/delete", poem_controller.delete);
 router.get("/delete/:id", poem_controller.deletePoem);
 router.get("/details/:id", poem_controller.details);
 
+router.get('/pdfview', poem_controller.showReport);
+router.get("/generatepdf", poem_controller.allReport);
+
 
 
 
