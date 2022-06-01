@@ -12,6 +12,8 @@ router.post("/update/:id", book_controller.updateBook);
 router.get("/update", book_controller.update);
 router.get("/delete", book_controller.delete);
 router.get("/delete/:id", book_controller.deleteBook);
+router.get('/pdfview', book_controller.showReport);
+router.get("/generatepdf", book_controller.allReport);
 
 
 

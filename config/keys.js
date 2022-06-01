@@ -3,6 +3,8 @@
 //dbPassword = 'mongodb+srv://zain57ul:Zainul10@cluster0.46kp4.mongodb.net/mylab?retryWrites=true&w=majority'
 dbPassword = 'mongodb+srv://abdullah1912:abcd1234@webproject.7w438.mongodb.net/WebProject?retryWrites=true&w=majority'
 
+//dbPassword = 'mongodb+srv://client:client123@cluster0.xpbkm.mongodb.net/Cluster0?retryWrites=true&w=majority'
+
 module.exports = {
     mongoURI: dbPassword
 };

@@ -1,5 +1,5 @@
 const Book = require("../models/books.model");
-//const pdf = require("html-pdf");
+const pdf = require("html-pdf");
 const fs = require("fs");
 const options = { format: "A4" };
 
@@ -134,24 +134,37 @@ exports.deleteBook = async (req, res) => {
     res.redirect("/book/all");
 };
 
+exports.showReport = async (req,res) => {
+    const result = Book.find({})
+    const user = {name: 'Books',
+    link: '/book/generatepdf'}
+    
+    await result.exec(function(err,data){
+        if(err) throw err
+        res.render('reportTemplate',{ records: data, user})
+    }) 
+    
+}
+
 exports.allReport = (req, res) => {
-    Book.find(function (err, book) {
+    const user = {name: 'Books',
+    link: '/book/generatepdf'}
+    Book.find(function(err, books) {
         if (err) {
             return res
                 .status(400)
                 .json({ err: "Oops something went wrong! Cannont find books." });
         }
         res.status(200).render(
-            "reports/book/all", {
-            book
-        },
-            function (err, html) {
+            "reportTemplate", {records: books,user},
+            function(err, html) {
                 pdf
                     .create(html, options)
-                    .toFile("uploads/all.pdf", function (err, result) {
+                    .toFile("uploads/books.pdf", function(err, result) {
                         if (err) return console.log(err);
                         else {
-                            var datafile = fs.readFileSync("uploads/all.pdf");
+                            var datafile = fs.readFileSync("uploads/books.pdf");
+                            console.log(datafile);
                             res.header("content-type", "application/pdf");
                             res.send(datafile);
                         }
