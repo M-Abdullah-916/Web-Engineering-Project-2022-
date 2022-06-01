@@ -64,6 +64,9 @@ router.get('/ViewAllPoems', (req, res) => res.redirect("/poem/all"));
 
 router.get('/mainScreen', forwardAuthenticated, (req, res) => res.render('mainScreen'));
 
+// Project Details
+router.get('/ProjectDetails', (req, res) => res.render('ProjectDetails'));
+
 //Edit Profile
 router.get('/editProfileView', ensureAuthenticated, editProfile_controller.show, (req, res) => res.render('editProfile', { user: req.user }));                  let Role;
 router.post('/editProfile', ensureAuthenticated, editProfile_controller.upload, editProfile_controller.update, editProfile_controller.show);

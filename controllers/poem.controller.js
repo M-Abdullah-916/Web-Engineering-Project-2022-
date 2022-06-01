@@ -70,18 +70,11 @@ exports.createAutomatic = (req, res) => {
   });
 };
 
-exports.details = (req, res) => {
-  Poem.findById(req.params.id, function (err, poem) {
-      if (err) {
-          return res.status(400).json({
-              err: `Oops something went wrong! Cannont find Poem with ${req.params.id}.`
-          });
-      }
-      res.render("student/studentDetail", {
-          student,
-          layout: "layouts/studentLayout"
-      });
-  });
+exports.details = async function (req, res)  {
+    let poem = await Poem.findById({ _id: req.params.id });
+    res.render("PoemsData", {
+        poem
+    });
 };
 
 exports.all = (req, res) => {

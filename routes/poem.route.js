@@ -12,6 +12,7 @@ router.post("/update/:id", poem_controller.updatePoem);
 router.get("/update", poem_controller.update);
 router.get("/delete", poem_controller.delete);
 router.get("/delete/:id", poem_controller.deletePoem);
+router.get("/details/:id", poem_controller.details);
 
 
 
