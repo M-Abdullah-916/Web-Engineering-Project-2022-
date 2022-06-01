@@ -18,7 +18,6 @@ exports.update = async function (req, res) {
         res.status(200).render("UpdateBook", {
             book
         });
-        //res.send(students);
     });
 };
 

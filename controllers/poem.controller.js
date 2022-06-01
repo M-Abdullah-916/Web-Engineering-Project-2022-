@@ -3,7 +3,7 @@ const Poem = require("../models/poems.model");
 const fs = require("fs");
 const options = { format: "A4" };
 
-// Add new Book function
+// Add new Poem function
 exports.add = function A(req, res) {
   res.render("AddPoemManually");
 };
@@ -18,7 +18,6 @@ exports.update = async function (req, res) {
       res.status(200).render("UpdatePoem", {
           poem
       });
-      //res.send(students);
   });
 };
 
