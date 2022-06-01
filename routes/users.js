@@ -15,7 +15,7 @@ const editProfile_controller = require("../controllers/editProfileController");
 
 
 // Login Page
-router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
+router.get('/login', forwardAuthenticated, (req, res) => res.render('login' , { user: req.user }));
 
 // Register Page
 router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
@@ -36,13 +36,13 @@ router.get('/AddPoemManually', (req, res) => res.render('AddPoemManually', { use
 router.get('/AddPoemAutomatically', (req, res) => res.render('AddPoemAutomatically', { user: req.user }));
 
 // Update Book with Parameters
-router.get('/UpdateAddedBooks', (req, res) => res.render('UpdateAddedBooks'));
+router.get('/UpdateAddedBooks',isAdmin, (req, res) => res.render('UpdateAddedBooks'));
 
 // Update Book
-router.get('/UpdateBookNP', (req, res) => res.redirect("/book/update"));
+router.get('/UpdateBook',isAdmin, (req, res) => res.redirect("/book/update"));
 
 // Delete Book
-router.get('/DeleteBook', (req, res) => res.redirect("/book/delete"));
+router.get('/DeleteBook',isAdmin, (req, res) => res.redirect("/book/delete"));
 
 // Search Book
 router.get('/SearchBook', (req, res) => res.render('SearchBook', { user: req.user }));
@@ -51,10 +51,10 @@ router.get('/SearchBook', (req, res) => res.render('SearchBook', { user: req.use
 router.get('/SearchPoem', (req, res) => res.render('SearchPoem', { user: req.user }));
 
 // Delete Poem
-router.get('/DeletePoem', (req, res) => res.render('DeletePoem', { user: req.user }));
+router.get('/DeletePoem',isAdmin, (req, res) => res.render('DeletePoem', { user: req.user }));
 
 // Update Poem
-router.get('/UpdatePoem', (req, res) => res.redirect("/poem/update"));
+router.get('/UpdatePoem',isAdmin, (req, res) => res.redirect("/poem/update"));
 
 // View all Books 
 router.get('/ViewAllBooks', (req, res) => res.redirect("/book/all"));
@@ -65,11 +65,11 @@ router.get('/ViewAllPoems', (req, res) => res.redirect("/poem/all"));
 router.get('/mainScreen', forwardAuthenticated, (req, res) => res.render('mainScreen'));
 
 //Edit Profile
-router.get('/editProfileView', ensureAuthenticated, editProfile_controller.show, (req, res) => res.render('editProfile', { user: req.user }))
-router.post('/editProfile', ensureAuthenticated, editProfile_controller.upload, editProfile_controller.update, editProfile_controller.show)
+router.get('/editProfileView', ensureAuthenticated, editProfile_controller.show, (req, res) => res.render('editProfile', { user: req.user }));                  let Role;
+router.post('/editProfile', ensureAuthenticated, editProfile_controller.upload, editProfile_controller.update, editProfile_controller.show);
 
 router.get('/editProfileView/security', (req, res) => res.render('security', { user: req.user }))
-
+router.get('/error', (req, res) => res.render('error', { user: req.user }));
 
 
 // Register
@@ -154,12 +154,43 @@ router.post('/register', (req, res) => {
 
 // Login
 router.post('/login', (req, res, next) => {
+
+    const { firstname,lastname,username,phonenumber,dob, email, password, password2, image} = req.body;
+    User.findOne({ email: email }).then(user => {
+        if (!user) {
+            console.log("Hmm");
+           
+        } else {
+            Role = user.role;
+               
+        }
+    });
+    console.log(req.body);
     passport.authenticate('local', {
         successRedirect: '/dashboard',
         failureRedirect: '/users/login',
         failureFlash: true
     })(req, res, next);
 });
+
+function isAdmin(req, res, next) {
+    console.log(req.user._id)
+    console.log(Role);
+    let rol;
+    let id = req.user._id;
+    User.findOne({ _id: id }).then(user => {
+        if (!user) {
+            console.log("Hmm");
+           
+        } else {
+            rol = user.role;   
+        }
+    });
+    if (req.isAuthenticated() && (Role =='Admin')) {
+        return next();
+    }
+    return res.redirect("/users/error");
+}
 
 // Logout
 router.get('/logout', (req, res) => {

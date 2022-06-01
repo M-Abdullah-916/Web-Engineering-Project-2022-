@@ -25,6 +25,10 @@ let UserSchema = new Schema({
     email: {
         type: String,
         required: true
+    }
+    ,
+    role: {
+        type: String,
     },
     registrationDate: {
         type: Date,
