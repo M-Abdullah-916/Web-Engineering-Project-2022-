@@ -24,57 +24,57 @@ exports.update = async function (req, res) {
 
 exports.updateParam = async function (req, res) {
   let poem = await Poem.findById({ _id: req.params.id });
-  res.render("UpdateAddedBook", {
+  res.render("UpdateAddedPoem", {
       poem
   });
 };
 
 exports.createManual = (req, res) => {
-  let book = new Book({
-      bookName: req.body.bookName,
+  let poem = new Poem({
+      poemName: req.body.poemName,
       authorName: req.body.authorName,
-      bookGenre: req.body.bookGenre,
-      bookData: req.body.bookData,
+      poemGenre: req.body.poemGenre,
+      poemData: req.body.poemData,
 
   });
 
-  book.save(function (err) {
+  poem.save(function (err) {
       if (err) {
           return res
               .status(400)
-              .json({ err: "Oops something went wrong! Cannont insert book.." });
+              .json({ err: "Oops something went wrong! Cannont insert poem.." });
       }
-      req.flash("book_add_success_msg", "New Book added successfully");
-      res.redirect("/book/all");
+      req.flash("poem_add_success_msg", "New Poem added successfully");
+      res.redirect("/poem/all");
   });
 };
 
 
 exports.createAutomatic = (req, res) => {
-  let book = new Book({
-      bookName: req.body.bookName,
+  let poem = new Book({
+      poemName: req.body.poemName,
       authorName: req.body.authorName,
-      bookGenre: req.body.bookGenre,
-      bookData: req.body.bookData,
+      poemGenre: req.body.poemGenre,
+      poemData: req.body.poemData,
 
   });
 
-  book.save(function (err) {
+  poem.save(function (err) {
       if (err) {
           return res
               .status(400)
-              .json({ err: "Oops something went wrong! Cannont insert book.." });
+              .json({ err: "Oops something went wrong! Cannont insert poem.." });
       }
-      req.flash("book_add_success_msg", "New Book added successfully");
-      res.redirect("/book/all");
+      req.flash("poem_add_success_msg", "New Poem added successfully");
+      res.redirect("/poem/all");
   });
 };
 
 exports.details = (req, res) => {
-  Book.findById(req.params.id, function (err, book) {
+  Poem.findById(req.params.id, function (err, poem) {
       if (err) {
           return res.status(400).json({
-              err: `Oops something went wrong! Cannont find Book with ${req.params.id}.`
+              err: `Oops something went wrong! Cannont find Poem with ${req.params.id}.`
           });
       }
       res.render("student/studentDetail", {
@@ -85,65 +85,63 @@ exports.details = (req, res) => {
 };
 
 exports.all = (req, res) => {
-  Book.find(function (err, book) {
+  Poem.find(function (err, poem) {
       if (err) {
           return res
               .status(400)
-              .json({ err: "Oops something went wrong! Cannont find Books." });
+              .json({ err: "Oops something went wrong! Cannont find Poems." });
       }
-      res.status(200).render("ViewAllBooks", {
-          book
+      res.status(200).render("ViewAllPoems", {
+        poem
       });
-      //res.send(students);
   });
 };
 
 // Post Update to insert data in database
-exports.updateBook = async (req, res) => {
-  let result = await Book.findByIdAndUpdate( req.params.id , { $set: req.body });
+exports.updatePoem = async (req, res) => {
+  let result = await Poem.findByIdAndUpdate( req.params.id , { $set: req.body });
   if (!result)
       return res.status(400).json({
-          err: `Oops something went wrong! Cannont update Book with ${req.params.id}.`
+          err: `Oops something went wrong! Cannont update Poem with ${req.params.id}.`
       });
-      res.redirect("/book/all");
-   req.flash("book_update_success_msg", "Book updated successfully");
+      res.redirect("/poem/all");
+   req.flash("poem_update_success_msg", "Poem updated successfully");
   
 };
 
 exports.delete = async function (req, res) {
-  Book.find(function (err, book) {
+  Poem.find(function (err, book) {
       if (err) {
           return res
               .status(400)
-              .json({ err: "Oops something went wrong! Cannont find Books." });
+              .json({ err: "Oops something went wrong! Cannont find Poems." });
       }
-      res.status(200).render("DeleteBook", {
-          book
+      res.status(200).render("DeletePoem", {
+        poem
       });
-      //res.send(students);
   });
 };
 
-exports.deleteBook = async (req, res) => {
-  let result = await Book.deleteOne({ _id: req.params.id });
+exports.deletePoem = async (req, res) => {
+  let result = await Poem.deleteOne({ _id: req.params.id });
   if (!result)
       return res.status(400).json({
-          err: `Oops something went wrong! Cannont delete student with ${req.params.id}.`
+          err: `Oops something went wrong! Cannont delete Poem with ${req.params.id}.`
       });
-  req.flash("student_del_success_msg", "Student has been deleted successfully");
-  res.redirect("/book/all");
+  req.flash("poem_del_success_msg", "Poem has been deleted successfully");
+  res.redirect("/poem/all");
 };
 
 exports.allReport = (req, res) => {
-  Book.find(function (err, book) {
+  Poem.find(function (err, poem) {
       if (err) {
           return res
               .status(400)
-              .json({ err: "Oops something went wrong! Cannont find books." });
+              .json({ err: "Oops something went wrong! Cannont find poems." });
       }
       res.status(200).render(
-          "reports/book/all", {
-          book
+          "reports/poem/all", {
+            poem
       },
           function (err, html) {
               pdf
