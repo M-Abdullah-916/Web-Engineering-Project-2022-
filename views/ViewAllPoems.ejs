@@ -1,69 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="/users/dashboard">Arabic Corpus</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li>
-        <a class="nav-link" href="/users/dashboard">Home </a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Books
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/users/AddBooksManually">Add Book Manually</a>
-          <a class="dropdown-item" href="/users/AddBooksAutomatically">Add Book Automatically</a>
-          <a class="dropdown-item" href="/users/DeleteBook">Delete Book</a>
-          <a class="dropdown-item" href="/users/SearchBook">Search Book</a>
-          <a class="dropdown-item" href="/users/UpdateBook">Update Book</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">View bookmarked Books</a>
-          <a class="dropdown-item" href="/users/ViewAllBooks">View all Books</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown nav-item active">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Poems <span class="sr-only">(current)</span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-          <a class="dropdown-item" href="/users/AddPoemManually">Add Poem Manually</a>
-          <a class="dropdown-item" href="/users/AddPoemAutomatically">Add Poem Automatically</a>
-          <a class="dropdown-item" href="/users/DeletePoem">Delete Poem</a>
-          <a class="dropdown-item" href="/users/SearchPoem">Search Poem</a>
-          <a class="dropdown-item" href="/users/UpdatePoem">Update Poem</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">View bookmarked Poems</a>
-          <a class="dropdown-item" href="/users/ViewAllPoems">View all Poems</a>
-        </div>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="#">Contact Us</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Project Details</a>
-      </li>
-
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-    <li class="nav-item">
-      <a href="/users/logout" class="btn btn-outline-success my-2 my-sm-0" style="margin-left: 20%;">Logout</a>
-    </li>
-  </div>
-</nav>
-
-<h1 class="mt-4" style="text-align: center; font-size: 50px; color: rgb(216, 207, 207);">View All Poems</h1>
-<p class="lead mb-3" style="text-align: center;">Welcome </p>
-
+<% include ./partials/navPoems %>
+<h1 class="mt-4" style="text-align: center; font-size: 50px; color: rgb(216, 207, 207);" >View All Poems</h1>
 <div class="container">
   <div class="table-wrapper">
     <div class="table-title">
@@ -71,7 +7,7 @@
         <div class="col-sm-8">
           <h2>
             <b>Poems </b>List
-            <a href="/book/add" class="">
+            <a href="/poem/add" class="">
               <i class="fas fa-plus-circle" style="color:green"></i>
             </a>
           </h2>
@@ -87,7 +23,7 @@
         <div class="col-sm-8"></div>
         <div class="col-sm-4 ">
           <h1>
-            <a href="#" class="float-right" target="blank">
+            <a href="/poem/pdfview" class="float-right" target="blank">
               <i class="fas fa-file-pdf" style="color:rgb(184, 75, 12)"></i>
             </a>
           </h1>
@@ -117,9 +53,9 @@
                 <%= poem.poemGenre%>
               </td>
               <td>
-                <a href="#" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
-                <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i
+                <a href="/poem/details/<%=poem._id%>" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
+                <a href="/poem/updateParam/<%=poem._id%>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                <a href="/poem/delete/<%=poem._id%>" class="delete" title="Delete" data-toggle="tooltip"><i
                     class="material-icons">&#xE872;</i></a>
               </td>
             </tr>
@@ -133,9 +69,9 @@
         <li class="page-item disabled">
           <a href="#"><i class="fa fa-angle-double-left"></i></a>
         </li>
-        <li class="page-item"><a href="#" class="page-link">1</a></li>
+        <li class="page-item active"><a href="#" class="page-link">1</a></li>
         <li class="page-item"><a href="#" class="page-link">2</a></li>
-        <li class="page-item active"><a href="#" class="page-link">3</a></li>
+        <li class="page-item"><a href="#" class="page-link">3</a></li>
         <li class="page-item"><a href="#" class="page-link">4</a></li>
         <li class="page-item"><a href="#" class="page-link">5</a></li>
         <li class="page-item">
@@ -145,3 +81,5 @@
     </div>
   </div>
 </div>
+
+<% include ./partials/footer %>

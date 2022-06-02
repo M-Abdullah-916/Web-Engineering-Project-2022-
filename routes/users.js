@@ -66,6 +66,9 @@ router.get('/ViewAllPoems', (req, res) => res.redirect("/poem/all"));
 
 router.get('/mainScreen', forwardAuthenticated, (req, res) => res.render('mainScreen'));
 
+// Project Details
+router.get('/ProjectDetails', (req, res) => res.render('ProjectDetails'));
+
 //Edit Profile
 router.get('/editProfileView', ensureAuthenticated, editProfile_controller.show, (req, res) => res.render('editProfile', { user: req.user }));                  let Role;
 router.post('/editProfile', ensureAuthenticated, editProfile_controller.upload, editProfile_controller.update, editProfile_controller.show);
@@ -186,7 +189,7 @@ function isAdmin(req, res, next) {
     let id = req.user._id;
     User.findOne({ _id: id }).then(user => {
         if (!user) {
-            console.log("Hmm");
+            console.log("Not A User");
            
         } else {
             rol = user.role;   
@@ -204,5 +207,8 @@ router.get('/logout', (req, res) => {
     req.flash('success_msg', 'You are logged out');
     res.redirect('/users/login');
 });
+
+
+
 
 module.exports = router;

@@ -18,7 +18,13 @@ exports.update = async function (req, res) {
         res.status(200).render("UpdateBook", {
             book
         });
-        //res.send(students);
+    });
+};
+
+exports.details = async function (req, res) {
+    let book = await Book.findById({ _id: req.params.id });
+    res.render("BooksData", {
+        book
     });
 };
 
@@ -70,21 +76,10 @@ exports.createAutomatic = (req, res) => {
     });
 };
 
-exports.details = (req, res) => {
-    Book.findById(req.params.id, function (err, book) {
-        if (err) {
-            return res.status(400).json({
-                err: `Oops something went wrong! Cannont find Book with ${req.params.id}.`
-            });
-        }
-        res.render("student/studentDetail", {
-            student,
-            layout: "layouts/studentLayout"
-        });
-    });
-};
 
-exports.all = (req, res) => {
+
+exports.all =(req, res) => {
+    
     Book.find(function (err, book) {
         if (err) {
             return res
@@ -92,23 +87,27 @@ exports.all = (req, res) => {
                 .json({ err: "Oops something went wrong! Cannont find Books." });
         }
         res.status(200).render("ViewAllBooks", {
+            
             book
         });
+        
         //res.send(students);
     });
 };
 
 // Post Update to insert data in database
 exports.updateBook = async (req, res) => {
-    let result = await Book.findByIdAndUpdate( req.params.id , { $set: req.body });
+    let result = await Book.findByIdAndUpdate(req.params.id, { $set: req.body });
     if (!result)
         return res.status(400).json({
             err: `Oops something went wrong! Cannont update Book with ${req.params.id}.`
         });
-        res.redirect("/book/all");
-     req.flash("book_update_success_msg", "Book updated successfully");
-    
+    res.redirect("/book/all");
+    req.flash("book_update_success_msg", "Book updated successfully");
+
 };
+
+
 
 exports.delete = async function (req, res) {
     Book.find(function (err, book) {
@@ -120,7 +119,6 @@ exports.delete = async function (req, res) {
         res.status(200).render("DeleteBook", {
             book
         });
-        //res.send(students);
     });
 };
 
@@ -134,25 +132,37 @@ exports.deleteBook = async (req, res) => {
     res.redirect("/book/all");
 };
 
+exports.showReport = async (req,res) => {
+    const result = Book.find({})
+    const user = {name: 'Books',
+    link: '/book/generatepdf'}
+    
+    await result.exec(function(err,data){
+        if(err) throw err
+        res.render('reportTemplate',{ records: data, user})
+    }) 
+    
+}
+
 exports.allReport = (req, res) => {
-    Student.find(function (err, students) {
+    const user = {name: 'Books',
+    link: '/book/generatepdf'}
+    Book.find(function(err, books) {
         if (err) {
             return res
                 .status(400)
-                .json({ err: "Oops something went wrong! Cannont find students." });
+                .json({ err: "Oops something went wrong! Cannont find books." });
         }
         res.status(200).render(
-            "reports/student/allStudent", {
-            students,
-            layout: "layouts/studentLayout"
-        },
-            function (err, html) {
+            "reportTemplate", {records: books,user},
+            function(err, html) {
                 pdf
                     .create(html, options)
-                    .toFile("uploads/allStudents.pdf", function (err, result) {
+                    .toFile("uploads/books.pdf", function(err, result) {
                         if (err) return console.log(err);
                         else {
-                            var datafile = fs.readFileSync("uploads/allStudents.pdf");
+                            var datafile = fs.readFileSync("uploads/books.pdf");
+                            console.log(datafile);
                             res.header("content-type", "application/pdf");
                             res.send(datafile);
                         }
@@ -161,3 +171,39 @@ exports.allReport = (req, res) => {
         );
     });
 };
+
+function PaginatedResults(model){
+    return async (req,res,next) => {
+        const page = parseInt(req.query.page)
+        const limit = parseInt(req.query.limit)
+
+        const startIndex = (page - 1) * limit
+        const endIndex = page * limit
+
+        const results = {}
+
+    if (endIndex < model.length){
+        results.next = {
+        page: page + 1,
+        limit: limit
+        }
+    }
+
+    if (startIndex > 0) {
+        results.previous = {
+        page: page - 1,
+        limit: limit
+        }
+    }
+
+    try{
+        results.results = await model.find().limit(limit).skip(startIndex).exec()
+        res.PaginatedResults = results
+        next()
+    } catch (e)  {
+        res.status(500).json({mesaage: e.mesaage})
+    }
+
+    }
+}
+

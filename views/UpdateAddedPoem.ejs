@@ -1,0 +1,34 @@
+<div class="container">
+    <% if(typeof poem !='undefined' && poem != null){ %>
+    <h1>Update Poem</h1>
+    <form action="/poem/update/<%=poem._id%>" method="POST">
+        <div class="form-group">
+            <label for="poemName">Poem Name</label>
+            <input type="text" class="form-control" id="poemName" name="poemName" placeholder="Poem Name"
+                value='<%= typeof poem.poemName != ' undefined' ? poem.poemName : '' %>' />
+        </div>
+        <div class="form-group">
+            <label for="authorName">Author Name</label>
+            <input type="text" class="form-control" id="authorName" name="authorName" placeholder="Author Name"
+                value='<%= typeof poem.poemName != ' undefined' ? poem.authorName : '' %>' />
+        </div>
+        <div class="form-group">
+            <label for="poemGenre">Poem Genre</label>
+            <input type="text" class="form-control" id="poemGenre" name="poemGenre" placeholder="Poem Genre"
+                value='<%= typeof poem.poemGenre != ' undefined' ? poem.poemGenre : '' %>' />
+        </div>
+        <div class="form-group">
+            <label for="poemData">Poem Content</label>
+            <input type="text" class="form-control" id="poemData" name="poemData" placeholder="Poem Content"
+                value='<%= typeof poem.poemData != ' undefined' ? poem.poemData : '' %>' />
+        </div>
+        <input type="submit" name="submit" value="Update" class="btn btn-primary btn-block" />
+    </form>
+    <br />
+    <a href="/poem/all" class="">
+        <i class="fas fa-home" style="color:green">View List</i>
+    </a>
+    <% } %>
+</div>
+
+<% include ./partials/footer %>

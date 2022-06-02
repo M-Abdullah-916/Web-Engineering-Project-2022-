@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+
 const book_controller = require("../controllers/books.controller");
 
 router.get("/add", book_controller.add);
@@ -12,6 +13,11 @@ router.post("/update/:id", book_controller.updateBook);
 router.get("/update", book_controller.update);
 router.get("/delete", book_controller.delete);
 router.get("/delete/:id", book_controller.deleteBook);
+router.get("/details/:id", book_controller.details);
+
+router.get('/pdfview', book_controller.showReport);
+router.get("/generatepdf", book_controller.allReport);
+
 
 
 

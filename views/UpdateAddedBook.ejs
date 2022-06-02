@@ -4,7 +4,7 @@
     <form action="/book/update/<%=book._id%>" method="POST">
         <div class="form-group">
             <label for="bookName">Book Name</label>
-            <input type="text" class="form-control" id="bookName" name="bookName" placeholder="Roll Number"
+            <input type="text" class="form-control" id="bookName" name="bookName" placeholder="Book Name"
                 value='<%= typeof book.bookName != ' undefined' ? book.bookName : '' %>' />
         </div>
         <div class="form-group">
@@ -31,3 +31,4 @@
     <% } %>
 </div>
 
+<% include ./partials/footer %>

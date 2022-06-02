@@ -1,10 +1,11 @@
-
+<% include ./partials/navBooks %>
+<h1 class="mt-4" style="text-align: center; font-size: 50px; color: rgb(216, 207, 207);" >Add Book Automatically</h1>
 
 <div class="row mt-5">
   <div class="col-md-6 m-auto">
     <div class="card card-body">
       <h1 class="text-center mb-3">
-        <i class="fa fa-book"></i> Add Books Manually
+        <i class="fa fa-book"></i> Add Books Automatically
       </h1>
       <% include ./partials/messages %>
       <form action="/book/adda" method="POST">
@@ -52,3 +53,5 @@
     </div>
   </div>
 </div>
+
+<% include ./partials/footer %>
