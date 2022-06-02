@@ -23,7 +23,7 @@ exports.upload = multer({ storage: storage }).single('image')
 
 exports.update = async(req, res) => {
     this.show
-
+ 
     if (req.file) {
         console.log('Added Successfully!!!')
         const result = User.findByIdAndUpdate({ _id: req.user._id }, {

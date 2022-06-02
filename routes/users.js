@@ -12,7 +12,8 @@ const { forwardAuthenticated, ensureAuthenticated } = require('../config/auth');
 
 //Controllers
 const editProfile_controller = require("../controllers/editProfileController");
-
+const ratings_controller = require("../controllers/ratings.controller");
+const review_controller = require("../controllers/ratings.controller");
 
 // Login Page
 router.get('/login', forwardAuthenticated, (req, res) => res.render('login' , { user: req.user }));
@@ -31,6 +32,7 @@ router.get('/AddBooksAutomatically', (req, res) => res.render('AddBooksAutomatic
 
 // Add Poem Manually
 router.get('/AddPoemManually', (req, res) => res.render('AddPoemManually', { user: req.user }));
+
 
 // Add Poem Automatically
 router.get('/AddPoemAutomatically', (req, res) => res.render('AddPoemAutomatically', { user: req.user }));
@@ -71,6 +73,10 @@ router.post('/editProfile', ensureAuthenticated, editProfile_controller.upload, 
 router.get('/editProfileView/security', (req, res) => res.render('security', { user: req.user }))
 router.get('/error', (req, res) => res.render('error', { user: req.user }));
 
+// Add Reviews
+router.get('/reviewsView',review_controller.all, (req, res) => res.render('reviews', { user: req.user }));
+router.get('/reviewsView/:id',review_controller.all, (req, res) => res.render('reviews', { user: req.user }));
+router.post('/reviews',review_controller.addReview,review_controller.all);
 
 // Register
 router.post('/register', (req, res) => {

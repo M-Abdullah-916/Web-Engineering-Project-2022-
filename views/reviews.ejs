@@ -1,0 +1,130 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/users/dashboard">Arabic Corpus</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li>
+          <a class="nav-link" href="/users/dashboard">Home </a>
+        </li>
+        <li class="nav-item dropdown nav-item active">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Books <span class="sr-only">(current)</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/users/AddBooksManually">Add Book Manually</a>
+              <a class="dropdown-item" href="/users/AddBooksAutomatically">Add Book Automatically</a>
+              <a class="dropdown-item" href="/users/DeleteBook">Delete Book</a>
+              <a class="dropdown-item" href="/users/SearchBook">Search Book</a>
+              <a class="dropdown-item" href="/users/UpdateBook">Update Book</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">View bookmarked Books</a>
+              <a class="dropdown-item" href="/users/ViewAllBooks">View all Books</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Poems
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+              <a class="dropdown-item" href="/users/AddPoemManually">Add Poem Manually</a>
+              <a class="dropdown-item" href="/users/AddPoemAutomatically">Add Poem Automatically</a>
+              <a class="dropdown-item" href="/users/DeletePoem">Delete Poem</a>
+              <a class="dropdown-item" href="/users/SearchPoem">Search Poem</a>
+              <a class="dropdown-item" href="/users/UpdatePoem">Update Poem</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">View bookmarked Poems</a>
+              <a class="dropdown-item" href="/users/ViewAllPoems">View all Poems</a>
+            </div>
+          </li>
+          
+        <li class="nav-item">
+            <a class="nav-link" href="#">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Project Details</a>
+          </li>
+       
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+      <li class="nav-item">
+        <a href="/users/logout" class="btn btn-outline-success my-2 my-sm-0" style="margin-left: 20%;">Logout</a>
+      </li>
+    </div>
+  </nav>
+
+<h1 class="mt-4" style="text-align: center; font-size: 50px; color: rgb(216, 207, 207);" >Reviews</h1>
+<p class="lead mb-3" style="text-align: center;">Welcome <%= user.firstname %> <%= user.lastname %></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+      <div class="card card-body">
+        <h1 class="text-center mb-3">
+          <i class="fa fa-book"></i> Add Books Manually
+        </h1>
+        <div style="margin-left: 5%;">
+            <% include ./partials/messages %>
+            <form action="/users/reviews" method="POST">
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="Username" name="Username" class="form-control" placeholder="Enter Username" size="15" value=" <%= user.firstname %>"/>
+              </div>
+              <div class="form-group">
+                <label for="data">Review</label>
+                <input type="text" id="data" name="data" class="form-control" cols="77" rows="10" size="60" placeholder="Your Review" />
+              </div>
+              <div class="form-group">
+                <label for="Rating">Rating</label>
+                <input type="number" id="Rating" name="Rating" class="form-control" size="20" placeholder="Your Rating" />
+              </div>
+              <input type="submit" name="submit" value="Add Review" class="btn btn-primary btn-block" />
+            </form>
+            </div>
+      </div>
+    </div>
+  </div>
+
+    <br><br>
+    <p class="lead mb-3" style="text-align: center;">Reviews</p>
+< <table class="table table-striped table-hover table-bordered">
+    <thead>
+      <tr>
+        <th>Username <i class="fa fa-sort"></i></th>
+        <th>Rating</th>
+        <th>Review</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% if(typeof review !='undefined' ){ %>
+        <% review.forEach(function(review) { %>
+          <tr>
+            <td>
+              <%= review.username%>
+            </td>
+            <td>
+              <%= review.rating%>
+            </td>
+            <td>
+              <%= review.data%>
+            </td>
+          </tr>
+          <% }); %>
+            <% } %>
+    </tbody>
+  </table>
